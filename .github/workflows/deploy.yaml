@@ -11,6 +11,7 @@ on:
       - CONTRIBUTING.md
       - LICENSE
 
+jobs:
   test:
     timeout-minutes: 2
     strategy:
