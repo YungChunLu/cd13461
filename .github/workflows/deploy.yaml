@@ -1,0 +1,38 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - CONTRIBUTING.md
+      - LICENSE
+
+  test:
+    timeout-minutes: 2
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm install
+      git remote add origin git@github.com:YungChunLu/cd13461.git
+      - run: npm run lint:all
+  build:
+    timeout-minutes: 2
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+  deploy:
+    timeout-minutes: 2
+    strategy:
+      fail-fast: true
+      max-parallel: 1
