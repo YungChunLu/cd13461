@@ -26,13 +26,13 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run lint:all
-  build:
-    timeout-minutes: 2
-    strategy:
-      fail-fast: true
-      max-parallel: 1
-  deploy:
-    timeout-minutes: 2
-    strategy:
-      fail-fast: true
-      max-parallel: 1
+  # build:
+  #   timeout-minutes: 2
+  #   strategy:
+  #     fail-fast: true
+  #     max-parallel: 1
+  # deploy:
+  #   timeout-minutes: 2
+  #   strategy:
+  #     fail-fast: true
+  #     max-parallel: 1
