@@ -37,6 +37,7 @@ jobs:
     strategy:
       fail-fast: true
       max-parallel: 1
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -50,7 +51,9 @@ jobs:
         with:
           path: "./_site"
   # deploy:
+  #   needs: [test, build]
   #   timeout-minutes: 2
   #   strategy:
   #     fail-fast: true
   #     max-parallel: 1
+  #   runs-on: ubuntu-latest
