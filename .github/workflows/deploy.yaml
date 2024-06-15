@@ -74,7 +74,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - uses: JasonEtco/create-an-issue@v2
+      - uses: actions/checkout@v4
+      - name: Put current date into a variable
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Create Issue
+        run: gh issue create --title "$title" --body "$body"
         env:
-          status: ${{ job.status }}
-          GITHUB_TOKEN: ${{ github.token }}
+          title: "${{ steps.date.outputs.date }} - Deployment: ${{ job.status }}"
+          body: "URL: ${{ env.github-pages }}"
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository_owner }}/${{ github.event.repository.name }}
