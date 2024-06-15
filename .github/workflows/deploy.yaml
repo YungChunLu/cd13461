@@ -82,4 +82,4 @@ jobs:
         run: gh issue create --title $title --body $body
         env:
           title: "${{env.NOW}} - Deployment: ${{ job.status }}"
-          body: "URL: ${{ steps.deployment.outputs.page_url }}""
+          body: "URL: ${{ env.github-pages }}""
