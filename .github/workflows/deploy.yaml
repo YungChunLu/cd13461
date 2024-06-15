@@ -74,5 +74,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Put current date into a variable
+        run: |
+          $NOW=& Get-Date -format yyyy-MM-dd
+          echo "NOW=$NOW" >> $env:GITHUB_ENV
       - name: Create Issue
-        run: gh issue create --title "$(date +'%Y-%m-%d') - Deployment: ${{ job.status }}" --body "URL: ${{ steps.deployment.outputs.page_url }}"
+        run: gh issue create --title $title --body $body
+        env:
+          title: "${{env.NOW}} - Deployment: ${{ job.status }}"
+          body: "URL: ${{ steps.deployment.outputs.page_url }}""
