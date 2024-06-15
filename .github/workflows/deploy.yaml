@@ -65,11 +65,6 @@ jobs:
       pages: write
       id-token: write
 
-    environment:
-      # environment created automatically by GitHub
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
@@ -79,4 +74,4 @@ jobs:
         env:
           status: ${{ job.status }}
           GITHUB_TOKEN: ${{ github.token }}
-          url: ${{ env.github-pages }}
+          url: ${{ steps.deployment.outputs.page_url }}
