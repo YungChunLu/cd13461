@@ -77,7 +77,7 @@ jobs:
       - name: Put current date into a variable
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Create Issue
-        run: gh issue create --title $title --body $body
+        run: gh issue create --title "$title" --body "$body"
         env:
-          title: ${{ steps.date.outputs.date }} - Deployment - ${{ job.status }}
-          body: URL - ${{ env.github-pages }}
+          title: "${{ steps.date.outputs.date }} - Deployment: ${{ job.status }}"
+          body: "URL: ${{ env.github-pages }}"
