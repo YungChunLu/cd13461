@@ -77,4 +77,4 @@ jobs:
       - uses: JasonEtco/create-an-issue@v2
         env:
           status: ${{ job.status }}
-          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
