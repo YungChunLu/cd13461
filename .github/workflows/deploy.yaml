@@ -15,8 +15,8 @@ on:
       - LICENSE
 
 jobs:
+  timeout-minutes: 2
   test:
-    timeout-minutes: 2
     strategy:
       fail-fast: true
       max-parallel: 1
