@@ -79,3 +79,4 @@ jobs:
         env:
           status: ${{ job.status }}
           GITHUB_TOKEN: ${{ github.token }}
+          url: ${{ env.github-pages }}
