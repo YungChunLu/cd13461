@@ -2,6 +2,7 @@ name: deploy
 
 env:
   URL_CHECKER_TIMEOUT: 1
+  PATH_PREFIX: /cd13461/
 
 on:
   workflow_dispatch:
@@ -15,8 +16,8 @@ on:
       - LICENSE
 
 jobs:
-  timeout-minutes: 2
   test:
+    timeout-minutes: 2
     strategy:
       fail-fast: true
       max-parallel: 1
@@ -30,11 +31,24 @@ jobs:
       - run: npm install
       - run: npm run lint:all
       - run: node script/url-checker.js -t $URL_CHECKER_TIMEOUT
-  # build:
-  #   timeout-minutes: 2
-  #   strategy:
-  #     fail-fast: true
-  #     max-parallel: 1
+  build:
+    needs: test
+    timeout-minutes: 2
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+      - uses: actions/configure-pages@v4
+      - run: npm install
+      - run: npm run prod
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: "./_site"
   # deploy:
   #   timeout-minutes: 2
   #   strategy:
