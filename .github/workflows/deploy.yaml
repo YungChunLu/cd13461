@@ -83,4 +83,5 @@ jobs:
           title: "${{ steps.date.outputs.date }} - Deployment: ${{ job.status }}"
           body: "URL: ${{ env.github-pages }}"
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.event.repository.name }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
