@@ -79,5 +79,5 @@ jobs:
       - name: Create Issue
         run: gh issue create --title $title --body $body
         env:
-          title: "${{ steps.date.outputs.date }} - Deployment: ${{ job.status }}"
-          body: "URL: ${{ env.github-pages }}"
+          title: ${{ steps.date.outputs.date }} - Deployment: ${{ job.status }}
+          body: URL: ${{ env.github-pages }}
