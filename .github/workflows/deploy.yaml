@@ -55,7 +55,7 @@ jobs:
         with:
           path: "./_site"
         env:
-          PATH_PREFIX: ${{ github.event.repository.name }}
+          PATH_PREFIX: /${{ github.event.repository.name }}/
   deploy:
     needs: [test, build]
     timeout-minutes: 2
