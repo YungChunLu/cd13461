@@ -50,6 +50,8 @@ jobs:
           cache: 'npm'
       - uses: actions/configure-pages@v4
       - run: npm install
+      - run: echo $PATH_PREFIX
+          PATH_PREFIX: /${{ github.event.repository.name }}/
       - run: npm run prod
         env:
           PATH_PREFIX: /${{ github.event.repository.name }}/
