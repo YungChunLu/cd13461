@@ -51,11 +51,12 @@ jobs:
       - uses: actions/configure-pages@v4
       - run: npm install
       - run: npm run prod
+        env:
+          PATH_PREFIX: /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: "./_site"
-        env:
-          PATH_PREFIX: /${{ github.event.repository.name }}/
+
   deploy:
     needs: [test, build]
     timeout-minutes: 2
