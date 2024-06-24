@@ -2,7 +2,6 @@ name: deploy
 
 env:
   URL_CHECKER_TIMEOUT: 1
-  PATH_PREFIX: /cd13461/
 
 on:
   workflow_dispatch:
@@ -15,7 +14,9 @@ on:
       - CONTRIBUTING.md
       - LICENSE
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 
 jobs:
@@ -53,6 +54,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: "./_site"
+        env:
+          PATH_PREFIX: ${{ github.event.repository.name }}
   deploy:
     needs: [test, build]
     timeout-minutes: 2
