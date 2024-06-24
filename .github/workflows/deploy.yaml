@@ -18,7 +18,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-
 jobs:
   test:
     timeout-minutes: 2
@@ -50,16 +49,12 @@ jobs:
           cache: 'npm'
       - uses: actions/configure-pages@v4
       - run: npm install
-      - run: echo $PATH_PREFIX
-        env:
-          PATH_PREFIX: /${{ github.event.repository.name }}/
       - run: npm run prod
         env:
           PATH_PREFIX: /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: "./_site"
-
   deploy:
     needs: [test, build]
     timeout-minutes: 2
