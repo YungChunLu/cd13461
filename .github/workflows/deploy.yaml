@@ -15,15 +15,12 @@ on:
       - LICENSE
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: udacity
   cancel-in-progress: true
 
 jobs:
   test:
     timeout-minutes: 2
-    strategy:
-      fail-fast: true
-      max-parallel: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,9 +34,6 @@ jobs:
   build:
     needs: test
     timeout-minutes: 2
-    strategy:
-      fail-fast: true
-      max-parallel: 1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -58,9 +52,6 @@ jobs:
   deploy:
     needs: [test, build]
     timeout-minutes: 2
-    strategy:
-      fail-fast: true
-      max-parallel: 1
     runs-on: ubuntu-latest
 
     permissions:
